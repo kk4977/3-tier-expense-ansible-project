@@ -4,9 +4,9 @@
   vars: 
     login_host: db.sivakumar.cloud
   vars_prompt:
-    name: mysql_root_password
-    promot: enter the mysql root password
-    private: no
+    - name: mysql_root_password
+      promot: enter the mysql root password
+      private: no
   tasks:
   - name: inatall the MySQL server 8.0.x
     ansible.builtin.dnf:
