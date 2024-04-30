@@ -1,0 +1,44 @@
+- name: configure the Db Server
+  host: db 
+  become: yes
+  vars: 
+    login_host: db.sivakumar.cloud
+  vars prompt:
+    name: mysql_root_password
+    promot: enter the mysql root password
+    private: no
+  tasks:
+  - name: inatall the MySQL server 8.0.x
+    ansible.builtin.dnf:
+      name: mysql-server
+      state: started
+- name: start and enable the MySQL dependencies
+  ansible.builtin.service:
+    name: mysqld
+    state: started
+    enabled: yes
+- name: install python mysql dependencies
+  ansible.builtin.pip:
+    name: 
+    - PyMySQL
+    - cryptography
+    executable: pip3.9
+
+- name: check DB connection
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: "{{mysql_root_password}}"
+    login_host: "{{login_host}}"
+    filter: version 
+  ignore_errors: yes
+  registry: mysql_connection_output
+
+
+
+- name: Print the output 
+  ansible.builtin.debug:
+    msg: "output: {{mysql_connection_output}}"
+
+- name: setup root password
+  ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
+  when: mysql_connection_output.failed is true
