@@ -3,7 +3,7 @@
   become: yes
   vars: 
     login_host: db.sivakumar.cloud
-  vars prompt:
+  vars_prompt:
     name: mysql_root_password
     promot: enter the mysql root password
     private: no
