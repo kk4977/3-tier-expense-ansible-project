@@ -23,7 +23,6 @@
       - PyMySQL
       - cryptography
       executable: pip3.9
-
   - name: check DB connection
     community.mysql.mysql_info:
       login_user: root
