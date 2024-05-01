@@ -44,6 +44,21 @@
     args:
       chdir: /app
 
+  - name: Copy to Backend server
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+
+  - name: install python mysql dependencies
+    ansible.builtin.pip: 
+      name:
+      - PyMySQL # to connect MySQL DB from Ansible
+      - cryptography
+      executable: pip3.9 # pip3.11 if python version is 3.11
+
+    
+  
+
 
       
 
