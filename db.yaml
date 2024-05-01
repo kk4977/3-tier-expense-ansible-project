@@ -8,7 +8,7 @@
     prompt: enter the mysql root password
     private: no
   tasks:
-  - name: inatall the MySQL server 8.0.x
+  - name: install the MySQL server 8.0.x
     ansible.builtin.dnf:
       name: mysql-server
       state: started
