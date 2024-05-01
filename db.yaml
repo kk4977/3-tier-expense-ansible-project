@@ -11,7 +11,7 @@
   - name: install the MySQL server 8.0.x
     ansible.builtin.dnf:
       name: mysql-server
-      state: started
+      state: latest
   - name: start and enable the MySQL dependencies
     ansible.builtin.service:
       name: mysqld
